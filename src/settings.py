@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'corsheaders',
     'articles',
-    'auth'
+    'authentication'
 ]
 
 SITE_ID = 1
@@ -137,15 +137,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
     ]
 }
 
-AUTH_USER_MODEL = 'auth.CustomUser'
+AUTH_USER_MODEL = 'authentication.CustomUser'
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+    'REGISTER_SERIALIZER': 'authentication.serializers.CustomRegisterSerializer',
 }
+
+ACCOUNT_ADAPTER = 'authentication.adapter.CustomAccountAdapter'

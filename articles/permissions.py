@@ -7,6 +7,7 @@ class IsProvider(BasePermission):
     def has_permission(self, request, view):
         if request.method == "POST":
             return request.user.is_provider
+        return True
 
 class IsOwner(BasePermission):
     message = "Only article owner can delete his own article"
@@ -14,3 +15,4 @@ class IsOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method == "DELETE":
             return request.user == obj.user
+        return True
